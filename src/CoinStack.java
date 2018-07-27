@@ -14,8 +14,8 @@ public class CoinStack{
             return false;
         }
         else{
-        this.CoinAmount--;
-        return true;
+            this.CoinAmount--;
+            return true;
         }
     }
 

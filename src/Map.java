@@ -23,4 +23,12 @@ public class Map {
     public void addCoinStack(CoinStack coinStack){
         CoinStacks.add(coinStack);
     }
+
+    public ArrayList<Wall> getWalls() {
+        return Walls;
+    }
+
+    public ArrayList<CoinStack> getCoinStacks() {
+        return CoinStacks;
+    }
 }
