@@ -8,17 +8,6 @@ public class CoinStack{
         Column = column;
         CoinAmount = amount;
     }
-
-    public boolean takeCoin(){
-        if(this.CoinAmount==0){
-            return false;
-        }
-        else{
-            this.CoinAmount--;
-            return true;
-        }
-    }
-
     public int getCoinAmount() {
         return CoinAmount;
     }
