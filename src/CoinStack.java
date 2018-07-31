@@ -3,6 +3,7 @@ public class CoinStack{
     private int Column;
     private int CoinAmount;
 
+    //Constructor
     public CoinStack(int row, int column, int amount) {
         Row = row;
         Column = column;
@@ -12,9 +13,12 @@ public class CoinStack{
         return CoinAmount;
     }
 
-    public int getRow() {
-        return Row;
+    public void setCoinAmount(int coinAmount) {
+        CoinAmount = coinAmount;
     }
+
+    public int getRow() {
+        return Row; }
 
     public void setRow(int row) {
         Row = row;
@@ -26,5 +30,8 @@ public class CoinStack{
 
     public void setColumn(int column) {
         Column = column;
+    }
+    public String toString(){
+        return String.valueOf(getCoinAmount());
     }
 }

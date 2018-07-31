@@ -8,10 +8,11 @@ public class Map {
     private Robot robot;
     //Constructor
 
-
-    public Map(int height, int width, Robot robot) {
+    public Map(int height, int width, ArrayList<Wall> walls, ArrayList<CoinStack> coinStacks, Robot robot) {
         Height = height;
         Width = width;
+        Walls = walls;
+        CoinStacks = coinStacks;
         this.robot = robot;
     }
 
@@ -27,7 +28,7 @@ public class Map {
     public ArrayList<Wall> getWalls() {
         return Walls;
     }
-    private boolean frontIsClear(){
+    public boolean frontIsClear(){
         boolean clear= true;
         ArrayList<Wall> walls= this.getWalls();
         for ( Wall wall: walls){
@@ -46,44 +47,44 @@ public class Map {
         }
         return clear;
     }
-    public boolean moveRobot(){
-        boolean succes=false;
-        if (frontIsClear()){
-            if(this.robot.getDirreccion()==0){
-                this.robot.setRow(this.robot.getRow()+1);
-                succes=true;
-            }
-            else if(this.robot.getDirreccion()==1){
-                this.robot.setColumn(this.robot.getColumn()+1);
-                succes=true;
-            }
-            else if(this.robot.getDirreccion()==2){
-                this.robot.setRow(this.robot.getRow()-1);
-                succes=true;
-            }
-            else if(this.robot.getDirreccion()==3){
-                this.robot.setColumn(this.robot.getColumn()-1);
-                succes=true;
-            }
-        }
-        return succes;
-    }
-    private boolean robotIsOnCoin(){
-        boolean onCoin=false;
+    public CoinStack robotIsOnCoin(){
         int robotRow= this.robot.getRow();
         int robotColumn= this.robot.getColumn();
-        ArrayList<Wall> walls= this.getWalls();
-        for (Wall wall : walls){
-            int wallRow= wall.getRow();
-            int wallColumn = wall.getColumn();
-            if (robotRow==wallRow && robotColumn==wallColumn){
-                onCoin= true;
+        ArrayList<CoinStack> coinStacks= this.getCoinStacks();
+        for (CoinStack coinStack : coinStacks){
+            int coinStackRow= coinStack.getRow();
+            int coinStackColumn = coinStack.getColumn();
+            if (this.robot.getRow()==coinStackRow && this.robot.getColumn()==coinStackColumn){
+                return coinStack;
+
             }
         }
-        return onCoin;
+        return null;
     }
-
     public ArrayList<CoinStack> getCoinStacks() {
         return CoinStacks;
+    }
+    public String toString(){
+        String map= null;
+        for(int Row=0; Row<= this.Height; Row++){
+            for(int Column=0; Column<= this.Width; Column ++){
+                for(Wall wall:this.Walls){
+                    if (wall.getRow()== Row && wall.getColumn()==Column){
+                        map+=wall.toString();
+                    }
+                }
+                for (CoinStack coinStack: this.CoinStacks){
+                    if (coinStack.getRow()==Row && coinStack.getColumn()==Column){
+                        map+=coinStack.toString();
+                    }
+                }
+                if(this.robot.getRow()==Row && this.robot.getColumn()==Column){
+                    map+=this.robot.toString();
+
+                }
+                else{map+="";}
+            }
+        }
+        return map;
     }
 }

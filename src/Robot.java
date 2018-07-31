@@ -24,6 +24,40 @@ public class Robot {
             this.Dirreccion=0;
         }
     }
+    public void addCoin(){
+        this.CoinPurse++;
+    }
+    public boolean moveRobot(Map map){
+        boolean succes=false;
+        if (map.frontIsClear()){
+            if(this.getDirreccion()==0){
+                this.setRow(this.getRow()+1);
+                succes=true;
+            }
+            else if(this.getDirreccion()==1){
+                this.setColumn(this.getColumn()+1);
+                succes=true;
+            }
+            else if(this.getDirreccion()==2){
+                this.setRow(this.getRow()-1);
+                succes=true;
+            }
+            else if(this.getDirreccion()==3){
+                this.setColumn(this.getColumn()-1);
+                succes=true;
+            }
+        }
+        return succes;
+    }
+    public boolean pickCoin(Map map){
+        if (map.robotIsOnCoin()!=null){
+            this.addCoin();
+            CoinStack coinStack=map.robotIsOnCoin();
+            coinStack.setCoinAmount(coinStack.getCoinAmount()-1);
+            return true;
+        }
+        else{return false;}
+    }
 
     //Getters & Setters
     public int getDirreccion() {
@@ -48,5 +82,16 @@ public class Robot {
 
     public void setColumn(int column) {
         this.Column = column;
+    }
+
+    public String toString(){
+        String direction="";
+        switch (getDirreccion()){
+            case 0: direction= "^";
+            case 1: direction= ">";
+            case 2: direction= "V";
+            case 3: direction= "<";
+        }
+        return direction;
     }
 }

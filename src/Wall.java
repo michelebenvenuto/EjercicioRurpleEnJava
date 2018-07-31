@@ -22,4 +22,7 @@ public class Wall {
     public void setColumn(int column) {
         Column = column;
     }
+    public String toString(){
+        return "*";
+    }
 }
