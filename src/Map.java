@@ -1,3 +1,5 @@
+import com.sun.org.apache.xpath.internal.functions.FuncSubstring;
+
 import java.util.ArrayList;
 
 public class Map {
@@ -7,15 +9,57 @@ public class Map {
     private ArrayList<CoinStack> CoinStacks = new ArrayList();
     private Robot robot;
     //Constructor
+    public void createMap(ArrayList<String> readMap, Map maptoSolve) {
+        maptoSolve.Height=readMap.size();
+        String actualRow;
+        Character character;
+        for (int row = 0; row <readMap.size(); row++) {
+            actualRow=readMap.get(row);
+            maptoSolve.Width=actualRow.length();
+            for (int column=0; column<actualRow.length();column++){
+                character=actualRow.charAt(column);
+                String symbol=String.valueOf(character);
+                if(symbol=="*"){
+                    Wall newWall= new Wall(row,column);
+                    maptoSolve.addWall(newWall);
+                }
+                else if(symbol=="^"){
+                    Robot newRobot= new Robot(row, column,0);
+                    maptoSolve.robot=newRobot;
+                }
+                else if(symbol==">"){
+                    Robot newRobot= new Robot(row, column,1);
+                    maptoSolve.robot=newRobot;
+                }
+                else if(symbol=="V"){
+                    Robot newRobot= new Robot(row, column,2);
+                    maptoSolve.robot=newRobot;
+                }
+                else if(symbol=="<"){
+                    Robot newRobot= new Robot(row, column,3);
+                    maptoSolve.robot=newRobot;
+                }
+                else if (checkIfCoin(symbol)){
+                    CoinStack newCoinstack= new CoinStack(row,column,Integer.parseInt(symbol));
+                    maptoSolve.addCoinStack(newCoinstack);
+                }
 
-    public Map(int height, int width, ArrayList<Wall> walls, ArrayList<CoinStack> coinStacks, Robot robot) {
-        Height = height;
-        Width = width;
-        Walls = walls;
-        CoinStacks = coinStacks;
-        this.robot = robot;
+            }
+        }
     }
-
+    private boolean checkIfCoin(String letter){
+        try{
+            int numero= Integer.valueOf(letter);
+            if(1<= numero && numero<=9){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }catch (NumberFormatException exeption){
+            return false;
+        }
+    }
     //Methods
     public void addWall(Wall wall){
         Walls.add(wall);
@@ -27,6 +71,10 @@ public class Map {
 
     public ArrayList<Wall> getWalls() {
         return Walls;
+    }
+
+    public Robot getRobot() {
+        return robot;
     }
 
     public boolean frontIsClear(){
@@ -55,7 +103,7 @@ public class Map {
         for (CoinStack coinStack : coinStacks){
             int coinStackRow= coinStack.getRow();
             int coinStackColumn = coinStack.getColumn();
-            if (this.robot.getRow()==coinStackRow && this.robot.getColumn()==coinStackColumn){
+            if (robotRow==coinStackRow && robotColumn==coinStackColumn){
                 return coinStack;
 
             }
@@ -66,22 +114,22 @@ public class Map {
         return CoinStacks;
     }
     public String toString(){
-        String map= null;
-        for(int Row=0; Row<= this.Height; Row++){
-            for(int Column=0; Column<= this.Width; Column ++){
+        String map="";
+        for(int Row=0; Row< this.Height; Row++){
+            map+="\n";
+            for(int Column=0; Column < this.Width; Column ++){
                 for(Wall wall:this.Walls){
                     if (wall.getRow()== Row && wall.getColumn()==Column){
-                        map+=wall.toString();
+                        map += wall;
                     }
                 }
                 for (CoinStack coinStack: this.CoinStacks){
                     if (coinStack.getRow()==Row && coinStack.getColumn()==Column){
-                        map+=coinStack.toString();
+                        map+=coinStack;
                     }
                 }
-                if(this.robot.getRow()==Row && this.robot.getColumn()==Column){
-                    map+=this.robot.toString();
-
+                if(robot.getRow()==Row && robot.getColumn()==Column){
+                    map+= robot;
                 }
                 else{map+="";}
             }

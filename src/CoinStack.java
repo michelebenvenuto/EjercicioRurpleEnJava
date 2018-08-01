@@ -32,6 +32,6 @@ public class CoinStack{
         Column = column;
     }
     public String toString(){
-        return String.valueOf(getCoinAmount());
+        return Integer.toString(getCoinAmount());
     }
 }

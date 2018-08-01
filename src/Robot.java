@@ -90,7 +90,7 @@ public class Robot {
 
     public String toString(){
         String direction="";
-        switch (getDirreccion()){
+        switch (this.getDirreccion()){
             case 0: direction= "^";
             case 1: direction= ">";
             case 2: direction= "V";
