@@ -64,6 +64,10 @@ public class Robot {
         return Dirreccion;
     }
 
+    public void setDirreccion(int dirreccion) {
+        Dirreccion = dirreccion;
+    }
+
     public int getCoinPurse() {
         return CoinPurse;
     }

@@ -28,6 +28,7 @@ public class Map {
     public ArrayList<Wall> getWalls() {
         return Walls;
     }
+
     public boolean frontIsClear(){
         boolean clear= true;
         ArrayList<Wall> walls= this.getWalls();
