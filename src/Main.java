@@ -54,10 +54,6 @@ public class Main {
                 System.out.println(maptoSolve);
                 System.out.println("EL robot tiene "+maptoSolve.getRobot().getCoinPurse()+" monedas");
             }
-            else{System.out.println("No conosco esta instruccion");
-                System.out.println(maptoSolve.toString());
-                System.out.println("EL robot tiene " +maptoSolve.getRobot().getCoinPurse()+ " monedas");
-            }
         }
 
     }

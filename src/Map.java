@@ -11,11 +11,11 @@ public class Map {
     //Constructor
     public void createMap(ArrayList<String> readMap, Map maptoSolve) {
         maptoSolve.Height=readMap.size();
+        maptoSolve.Width=readMap.get(0).length();
         String actualRow;
         Character character;
         for (int row = 0; row <readMap.size(); row++) {
             actualRow=readMap.get(row);
-            maptoSolve.Width=actualRow.length();
             for (int column=0; column<actualRow.length();column++){
                 character=actualRow.charAt(column);
                 String symbol=String.valueOf(character);
@@ -115,6 +115,7 @@ public class Map {
     }
     public String toString(){
         String map="";
+        Robot robot= this.getRobot();
         for(int Row=0; Row< this.Height; Row++){
             map+="\n";
             for(int Column=0; Column < this.Width; Column ++){
@@ -129,7 +130,7 @@ public class Map {
                     }
                 }
                 if(robot.getRow()==Row && robot.getColumn()==Column){
-                    map+= robot;
+                    map+=this.getRobot();
                 }
                 else{map+="";}
             }
