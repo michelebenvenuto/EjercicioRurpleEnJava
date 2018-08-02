@@ -34,25 +34,26 @@ public class Main {
                     Paths.get(instructionFile),
                     StandardCharsets.UTF_8
             );
-            lines.forEach(s ->{ instructions.add(s);});
+            lines.forEach(s -> instructions.add(s));
         }catch (IOException exception){
             System.out.println("Error");
         }
         for(String instruction: instructions){
-            if(instruction== "MOVE"){
+            if(instruction.equals("MOVE") ){
                 maptoSolve.getRobot().moveRobot(maptoSolve);
                 System.out.println(maptoSolve);
                 System.out.println("EL robot tiene "+maptoSolve.getRobot().getCoinPurse()+" monedas");
             }
-            else if(instruction=="ROTATE"){
+            else if(instruction.equals("ROTATE")){
                 maptoSolve.getRobot().rotate();
                 System.out.println(maptoSolve);
                 System.out.println("EL robot tiene "+maptoSolve.getRobot().getCoinPurse()+" monedas");
             }
-            else if (instruction=="PICK"){
+            else if (instruction.equals("PICK")){
                 maptoSolve.getRobot().pickCoin(maptoSolve);
                 System.out.println(maptoSolve);
                 System.out.println("EL robot tiene "+maptoSolve.getRobot().getCoinPurse()+" monedas");
+                sleep(0.500);
             }
         }
 

@@ -19,25 +19,25 @@ public class Map {
             for (int column=0; column < actualRow.length();column++){
                 character=actualRow.charAt(column);
                 String symbol=String.valueOf(character);
-                if(symbol=="*"){
+                if(character==42){
                     Wall newWall= new Wall(row,column);
                     this.addWall(newWall);
                 }
-                else if(symbol=="^"){
+                else if(character==94){
                     Robot newRobot= new Robot(row, column,0);
-                    this.setRobot(newRobot);
+                    this.robot=newRobot;
                 }
-                else if(symbol==">"){
+                else if(character==62){
                     Robot newRobot= new Robot(row, column,1);
-                    this.setRobot(newRobot);
+                    this.robot=newRobot;
                 }
-                else if(symbol=="V"){
+                else if(character== 86){
                     Robot newRobot= new Robot(row, column,2);
-                    this.setRobot(newRobot);
+                    this.robot=newRobot;
                 }
-                else if(symbol=="<"){
+                else if(character==6){
                     Robot newRobot= new Robot(row, column,3);
-                    this.setRobot(newRobot);
+                    this.robot=newRobot;
                 }
                 else if (checkIfCoin(symbol)){
                     CoinStack newCoinstack= new CoinStack(row,column,Integer.parseInt(symbol));
@@ -121,6 +121,7 @@ public class Map {
         String map="";
         Robot robot= this.getRobot();
         for(int Row=0; Row < this.Height; Row++){
+            map+="\n";
             for(int Column=0; Column <this.Width; Column ++){
                 for(Wall wall:this.Walls){
                     if (wall.getRow()== Row && wall.getColumn()==Column){
@@ -134,8 +135,7 @@ public class Map {
                 }
                 if(robot.getRow()==Row && robot.getColumn()==Column){
                     map+=this.getRobot();
-                }
-                else{map+="";}
+                }else{map+="";}
             }
         }
         return map;
