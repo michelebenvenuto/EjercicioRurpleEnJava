@@ -18,7 +18,7 @@ public class Robot {
     //Methods
     public void rotate(){
         if (this.getDirreccion()<3){
-            this.Dirreccion++;
+            this.Dirreccion+=1;
         }
         else{
             this.Dirreccion=0;

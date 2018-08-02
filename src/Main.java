@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 public class Main {
@@ -43,17 +44,25 @@ public class Main {
                 maptoSolve.getRobot().moveRobot(maptoSolve);
                 System.out.println(maptoSolve);
                 System.out.println("EL robot tiene "+maptoSolve.getRobot().getCoinPurse()+" monedas");
+                try {
+                    TimeUnit.MILLISECONDS.sleep(500);
+                }catch (InterruptedException exception){}
             }
             else if(instruction.equals("ROTATE")){
                 maptoSolve.getRobot().rotate();
                 System.out.println(maptoSolve);
                 System.out.println("EL robot tiene "+maptoSolve.getRobot().getCoinPurse()+" monedas");
+                try {
+                    TimeUnit.MILLISECONDS.sleep(500);
+                }catch (InterruptedException exception){}
             }
             else if (instruction.equals("PICK")){
                 maptoSolve.getRobot().pickCoin(maptoSolve);
                 System.out.println(maptoSolve);
                 System.out.println("EL robot tiene "+maptoSolve.getRobot().getCoinPurse()+" monedas");
-                sleep(0.500);
+                try {
+                    TimeUnit.MILLISECONDS.sleep(500);
+                }catch (InterruptedException exception){}
             }
         }
 
