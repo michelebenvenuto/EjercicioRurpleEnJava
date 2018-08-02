@@ -92,9 +92,13 @@ public class Robot {
         String direction="";
         switch (this.getDirreccion()){
             case 0: direction= "^";
+                break;
             case 1: direction= ">";
+                break;
             case 2: direction= "V";
+                break;
             case 3: direction= "<";
+                break;
         }
         return direction;
     }
