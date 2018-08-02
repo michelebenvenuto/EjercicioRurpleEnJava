@@ -135,7 +135,7 @@ public class Map {
                 }
                 if(robot.getRow()==Row && robot.getColumn()==Column){
                     map+=this.getRobot();
-                }else{map+="";}
+                }else{map+=" ";}
             }
         }
         return map;
