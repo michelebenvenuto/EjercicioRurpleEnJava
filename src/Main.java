@@ -24,7 +24,7 @@ public class Main {
             System.out.println("Error");
         }
         Map maptoSolve= new Map();
-        maptoSolve.createMap(readMap, maptoSolve);
+        maptoSolve.createMap(readMap);
         System.out.println(maptoSolve);
 
         System.out.print("Introdusca el nombre del archivo de las instrucciones:");

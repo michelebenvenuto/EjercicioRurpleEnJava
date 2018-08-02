@@ -9,39 +9,39 @@ public class Map {
     private ArrayList<CoinStack> CoinStacks = new ArrayList();
     private Robot robot;
     //Constructor
-    public void createMap(ArrayList<String> readMap, Map maptoSolve) {
-        maptoSolve.Height=readMap.size();
-        maptoSolve.Width=readMap.get(0).length();
+    public void createMap(ArrayList<String> readMap) {
+        this.Height=readMap.size();
+        this.Width=readMap.get(0).length();
         String actualRow;
         Character character;
-        for (int row = 0; row <readMap.size(); row++) {
+        for (int row = 0; row < readMap.size(); row++) {
             actualRow=readMap.get(row);
-            for (int column=0; column<actualRow.length();column++){
+            for (int column=0; column < actualRow.length();column++){
                 character=actualRow.charAt(column);
                 String symbol=String.valueOf(character);
                 if(symbol=="*"){
                     Wall newWall= new Wall(row,column);
-                    maptoSolve.addWall(newWall);
+                    this.addWall(newWall);
                 }
                 else if(symbol=="^"){
                     Robot newRobot= new Robot(row, column,0);
-                    maptoSolve.robot=newRobot;
+                    this.setRobot(newRobot);
                 }
                 else if(symbol==">"){
                     Robot newRobot= new Robot(row, column,1);
-                    maptoSolve.robot=newRobot;
+                    this.setRobot(newRobot);
                 }
                 else if(symbol=="V"){
                     Robot newRobot= new Robot(row, column,2);
-                    maptoSolve.robot=newRobot;
+                    this.setRobot(newRobot);
                 }
                 else if(symbol=="<"){
                     Robot newRobot= new Robot(row, column,3);
-                    maptoSolve.robot=newRobot;
+                    this.setRobot(newRobot);
                 }
                 else if (checkIfCoin(symbol)){
                     CoinStack newCoinstack= new CoinStack(row,column,Integer.parseInt(symbol));
-                    maptoSolve.addCoinStack(newCoinstack);
+                    this.addCoinStack(newCoinstack);
                 }
 
             }
@@ -75,6 +75,10 @@ public class Map {
 
     public Robot getRobot() {
         return robot;
+    }
+
+    public void setRobot(Robot robot) {
+        this.robot = robot;
     }
 
     public boolean frontIsClear(){
@@ -116,9 +120,8 @@ public class Map {
     public String toString(){
         String map="";
         Robot robot= this.getRobot();
-        for(int Row=0; Row< this.Height; Row++){
-            map+="\n";
-            for(int Column=0; Column < this.Width; Column ++){
+        for(int Row=0; Row < this.Height; Row++){
+            for(int Column=0; Column <this.Width; Column ++){
                 for(Wall wall:this.Walls){
                     if (wall.getRow()== Row && wall.getColumn()==Column){
                         map += wall;
